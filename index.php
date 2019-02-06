@@ -69,23 +69,39 @@ function showForm()
 		}
 	</script>
 	<h3 align="center">' . smartTitle() . '</h3>
-	<p align="center">Please enter your name</p> 
+	<p align="center">Please select your items and submit your order</p>
+    <BR />
+    <BR />
+    <BR />
 	<form action="' . THIS_PAGE . '" method="post" onsubmit="return checkForm(this);">
              ';
-  
-    
+  echo '<table>
+        <tr>
+            <th>Quantity</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>';
 		foreach($config->items as $item)
           {
             //echo "<p>ID:$item->ID  Name:$item->Name</p>"; 
             //echo '<p>Taco <input type="text" name="item_1" /></p>';
+            echo '
+            <tr>
+              <td> QTY </td>
+              <td>' . $item->Name . '</td>
+              <td>' .$item->Description . '</td>
+              <td>' . $item->Price . '</td>
+            </tr>';
+
+              //echo '<p>' . $item->Name . ' <input type="text" name="item_' . $item->ID . '" /></p>';
               
-              echo '<p>' . $item->Name . ' <input type="text" name="item_' . $item->ID . '" /></p>';
-              
-          }       
+          }  
+          echo '</table>';
  
           echo '
 				<p>
-					<input type="submit" value="Please Enter Your Name"><em>(<font color="red"><b>*</b> required field</font>)</em>
+					<input type="submit" value="Submit your order"><em>(<font color="red"><b>*</b> required field</font>)</em>
 				</p>
 		<input type="hidden" name="act" value="display" />
 	</form>
