@@ -323,5 +323,8 @@ $isOpen = fopen($fileName,$myMode);
   }
 }#End fileWrite()
 
+
+setlocale(LC_MONETARY,"en_US");
+
 # END ERROR HANDLING FUNCTIONS (error handling/logging functions)---------------------------------------------------------- 
 #no closing PHP tag, on purpose

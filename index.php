@@ -25,6 +25,7 @@
  */
 # '../' works for a sub-folder.  use './' for the root  
 require 'inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
+require 'inc_biz/biz_logic.php'; #provides business logic for subtotal, total calculation
 require 'items.php'; 
 /*
 $config->metaDescription = 'Web Database ITC281 class website.'; #Fills <meta> tags.
@@ -117,7 +118,7 @@ function showData()
         //if form name attribute starts with 'item_', process it
         if(substr($name,0,5)=='item_')
         {
-            //explode the string into an array on the "_"
+            //explode the string into an array on the "_" looks like this : array(2) { [0]=> string(4) "item" [1]=> string(1) "9" }
             $name_array = explode('_',$name);
             //id is the second element of the array
 			//forcibly cast to an int in the process
@@ -135,8 +136,23 @@ function showData()
 				Use $value to determine the number of items ordered 
 				and create subtotals, etc.
 			
-			*/
-            echo "<p>You ordered $value of item number $id</p>";
+	 		*/
+			//getItem() takes the parent level of the object for an index $id -1
+			$ItemDetails = getItem($id); 			
+			
+			
+			#child level of object
+			//echo $ItemDetails->Price;
+			//var_dump($ItemDetails->Price);
+
+			echo '</pre>';
+			
+			//Calculates subtotal using child-level parameters
+			$mySubtotal = $value * $ItemDetails->Price;
+			
+            echo "<p>You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at $ItemDetails->Price each. Your subtotal for this item is $mySubtotal </p>";
+			
+            echo "<b><p>V2 You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at " . money_format('$%i', $ItemDetails->Price) . " each. Your subtotal for this item is " . money_format('$%i', $mySubtotal) . "</p></b>";
             
         }
         
@@ -146,7 +162,7 @@ function showData()
 	
 	
 	
-	echo '<p align="center"><a href="' . THIS_PAGE . '">RESET</a></p>';
+	echo '<p align="center"><a href="' . THIS_PAGE . '">RESET</a></p>';	
 	get_footer(); #defaults to footer_inc.php
 }
 ?>
