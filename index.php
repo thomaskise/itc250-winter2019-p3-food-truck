@@ -23,10 +23,9 @@
  * @todo finish instruction sheet
  * @todo add more complicated checkbox & radio button examples
  */
-
 # '../' works for a sub-folder.  use './' for the root  
-require 'include/config_inc.php'; #provides configuration, pathing, error handling, db credentials
-include 'items.php'; 
+require 'inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
+require 'items.php'; 
 /*
 $config->metaDescription = 'Web Database ITC281 class website.'; #Fills <meta> tags.
 $config->metaKeywords = 'SCCC,Seattle Central,ITC281,database,mysql,php';
@@ -39,12 +38,9 @@ $config->sidebar2 = ''; #goes inside right side of page
 $config->nav1["page.php"] = "New Page!"; #add a new page to end of nav1 (viewable this page only)!!
 $config->nav1 = array("page.php"=>"New Page!") + $config->nav1; #add a new page to beginning of nav1 (viewable this page only)!!
 */
-
 //END CONFIG AREA ----------------------------------------------------------
-
 # Read the value of 'action' whether it is passed via $_POST or $_GET with $_REQUEST
 if(isset($_REQUEST['act'])){$myAction = (trim($_REQUEST['act']));}else{$myAction = "";}
-
 switch ($myAction) 
 {//check 'act' for type of process
 	case "display": # 2)Display user's name!
@@ -53,7 +49,6 @@ switch ($myAction)
 	default: # 1)Ask user to enter their name 
 	 	showForm();
 }
-
 function showForm()
 {# shows form so user can enter their name.  Initial scenario
 	global $config;
@@ -88,12 +83,11 @@ function showForm()
             //echo '<p>Taco <input type="text" name="item_1" /></p>';
             echo '
             <tr>
-              <td> QTY </td>
+              <td><input type="text" name="item_' . $item->ID . '" /></td>
               <td>' . $item->Name . '</td>
               <td>' .$item->Description . '</td>
               <td>' . $item->Price . '</td>
             </tr>';
-
               //echo '<p>' . $item->Name . ' <input type="text" name="item_' . $item->ID . '" /></p>';
               
           }  
@@ -108,7 +102,6 @@ function showForm()
 	';
 	get_footer(); #defaults to footer_inc.php
 }
-
 function showData()
 {#form submits here we show entered name
 	
@@ -126,11 +119,9 @@ function showData()
         {
             //explode the string into an array on the "_"
             $name_array = explode('_',$name);
-
             //id is the second element of the array
 			//forcibly cast to an int in the process
             $id = (int)$name_array[1];
-
 			/*
 				Here is where you'll do most of your work
 				Use $id to loop your array of items and return 
@@ -150,7 +141,6 @@ function showData()
         }
         
         
-
     }
 	
 	
@@ -160,21 +150,3 @@ function showData()
 	get_footer(); #defaults to footer_inc.php
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
