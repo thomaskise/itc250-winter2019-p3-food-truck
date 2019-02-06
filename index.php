@@ -24,7 +24,7 @@
  * @todo add more complicated checkbox & radio button examples
  */
 # '../' works for a sub-folder.  use './' for the root  
-require 'inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
+require '../inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
 require 'items.php'; 
 /*
 $config->metaDescription = 'Web Database ITC281 class website.'; #Fills <meta> tags.
@@ -63,7 +63,7 @@ function showForm()
 			return true;//if all is passed, submit!
 		}
 	</script>
-	<h3 align="center">' . smartTitle() . '</h3>
+	<h3 align="center">Order Great Food Here!</h3>
 	<p align="center">Please select your items and submit your order</p>
     <BR />
     <BR />
@@ -83,7 +83,21 @@ function showForm()
             //echo '<p>Taco <input type="text" name="item_1" /></p>';
             echo '
             <tr>
-              <td><input type="text" name="item_' . $item->ID . '" /></td>
+
+              <td>  <select name="item_' .$item->ID . '">
+                        <option value=0>0</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                        <option value=6>6</option>
+                        <option value=7>7</option>
+                        <option value=8>8</option>
+                        <option value=9>9</option>
+                        <option value=10>10</option>
+                  </select>
+              </td>
               <td>' . $item->Name . '</td>
               <td>' .$item->Description . '</td>
               <td>' . $item->Price . '</td>
@@ -109,7 +123,7 @@ function showData()
      get_header(); #defaults to footer_inc.php
 	
 	
-	echo '<h3 align="center">' . smartTitle() . '</h3>';
+	echo '<h3 align="center">Here is your order!</h3>';
 	
 	foreach($_POST as $name => $value)
     {//loop the form elements

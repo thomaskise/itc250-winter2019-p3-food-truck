@@ -20,6 +20,12 @@ $myItem->addExtra("Lemon Wedges");
 $myItem->addExtra("Avacado");
 $config->items[] = $myItem;
 
+$myItem = new Item(3,"Hot Tamale","Our Tamales are awesome!",6.95);
+$myItem->addExtra("Salsa");
+$myItem->addExtra("Guacamole");
+$myItem->addExtra("Habenaro Peppers");
+$myItem->addExtra("Sour Cream");
+$config->items[] = $myItem;
 
 //create a counter to load the ids...
 //$items[] = new Item(1,"Taco","Our Tacos are awesome!",4.95);
