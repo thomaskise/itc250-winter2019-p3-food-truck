@@ -2,7 +2,7 @@
 /*
 *	biz_logic.php
 *	Defines business logic functions
-*
+*	
 *
 */
 
@@ -15,7 +15,7 @@ function getItem($id)
 		
 	//var_dump($config->items[$index]); // loads all arrays inside an array	
 	#Parent level of object
-	$myArray = $config->items[$index]; //Create an array with values of object indexed at $num	
+	$myArray = $config->items[$index]; //Create an array with values of object indexed at $index	
 	return $myArray;
 }
 
