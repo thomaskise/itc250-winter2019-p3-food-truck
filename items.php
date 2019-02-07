@@ -19,14 +19,14 @@ $myItem->addExtra("Lemon Wedges");
 $myItem->addExtra("Avacado");
 $config->items[] = $myItem;
 
-$myItem = new Item(3,"Hot Tamale","Our Tamales are awesome!",6.95);
+$myItem = new Item(4,"Hot Tamale","Our Tamales are awesome!",7.95);
 $myItem->addExtra("Salsa");
 $myItem->addExtra("Guacamole");
 $myItem->addExtra("Habenaro Peppers");
 $myItem->addExtra("Sour Cream");
 $config->items[] = $myItem;
 
-$myItem = new Item(3,"Chile Relleno","Chile Relleno are awesome!",6.95);
+$myItem = new Item(5,"Chile Relleno","Chile Relleno are awesome!",6.95);
 $myItem->addExtra("Salsa");
 $myItem->addExtra("Guacamole");
 $myItem->addExtra("Habenaro Peppers");
