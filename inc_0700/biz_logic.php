@@ -7,7 +7,7 @@
 */
 
 
-// getItem($id) loads array from $config->items[$id] into $ItemDetails
+// getItem($id) returns the array $myArray located at $config->items[$index] 
 function getItem($id)
 {	
 	global $config;

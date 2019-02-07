@@ -24,8 +24,8 @@
  * @todo add more complicated checkbox & radio button examples
  */
 # '../' works for a sub-folder.  use './' for the root  
-require 'inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
-require 'inc_biz/biz_logic.php'; #provides business logic for subtotal, total calculation
+require '../inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
+require '../inc_0700/biz_logic.php'; #provides business logic for subtotal, total calculation
 require 'items.php'; 
 /*
 $config->metaDescription = 'Web Database ITC281 class website.'; #Fills <meta> tags.
@@ -100,7 +100,7 @@ function showForm()
               </td>
               <td>' . $item->Name . '</td>
               <td>' .$item->Description . '</td>
-              <td>' . $item->Price . '</td>
+              <td>' . money_format('%n', $item->Price) . '</td>
             </tr>';
               //echo '<p>' . $item->Name . ' <input type="text" name="item_' . $item->ID . '" /></p>';
               
@@ -150,7 +150,7 @@ function showData()
 				and create subtotals, etc.
 			
 	 		*/
-			//getItem() takes the parent level of the object for an index $id -1
+			//getItem() finds the parent-level array for an index $id -1 of the object.
 			$ItemDetails = getItem($id); 			
 			
 			
@@ -160,12 +160,12 @@ function showData()
             
 			echo '</pre>';
 			
-			//Calculates subtotal using child-level parameters
+			//Calculates subtotal using array child-level key
 			$mySubtotal = $value * $ItemDetails->Price;
 			
             echo "<p>You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at $ItemDetails->Price each. Your subtotal for this item is $mySubtotal </p>";
 			
-            echo "<b><p>V2 You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at " . money_format('$%i', $ItemDetails->Price) . " each. Your subtotal for this item is " . money_format('$%i', $mySubtotal) . "</p></b>";
+            echo "<b><p>V2 You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at " . money_format('%n', $ItemDetails->Price) . " each. Your subtotal for this item is " . money_format('%n', $mySubtotal) . "</p></b>";
             
         }
         

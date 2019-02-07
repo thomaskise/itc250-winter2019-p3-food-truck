@@ -21,7 +21,7 @@
 # START SETTINGS (show or hide page errors, turn on/off error logging)---------------------------------------------
 # We can un-comment the line below to either see default errors (1) or shut off visual errors completely (0). 
 //ini_set('error_reporting', E_ALL | E_STRICT);  # E_ALL | E_STRICT = currently tracking all errors & warnings
-$sub_folder = 'wn19test/';//If app installed in subfolder, place here.  name of folder, no leading or trailing forward or backslash
+$sub_folder = 'wn19/';//If app installed in subfolder, place here.  name of folder, no leading or trailing forward or backslash
 define('SHOW_ALL_ERRORS', true); # TRUE = SHOW ALL SITE ERRORS - if FALSE must be logged in as ADMIN to view errors
 define('LOG_ALL_ERRORS', true); # TRUE = TRACK ALL ERRORS IN ERROR LOG FILE (UPDATED 7/14 FOR ZEPHIR!)
 define('SECURE',true); # true forces secure connection, https, for all site pages
@@ -53,13 +53,12 @@ header("Cache-Control: no-cache");header("Expires: -1");#Helps stop browser & pr
 # START CONSTANTS & PATHS (universal file paths & values)-----------------------------------------------------------------
 /* automatic path settings - use the following 4 path settings for placing all code in one application folder */ 
 define('VIRTUAL_PATH', $protocol . $_SERVER["HTTP_HOST"] . '/' . $sub_folder); # Virtual (web) 'root' of application for images, JS & CSS files
-define('SURVEYS_PATH', $protocol . $_SERVER["HTTP_HOST"] . '/' . $sub_folder . '/surveys'); # Virtual (web) 'root' of application for images, JS & CSS files
 define('PHYSICAL_PATH', $_SERVER["DOCUMENT_ROOT"] . '/' . $sub_folder); # Physical (PHP) 'root' of application for file & upload reference
 define('INCLUDE_PATH', PHYSICAL_PATH . 'inc_0700/'); # Path to PHP include files - INSIDE APPLICATION ROOT
 //define('INCLUDE_PATH', '/home/classes/horsey01/inc_cotlets/'); #Path to PHP include files - OUTSIDE WEB ROOT
 define('LOG_PATH', INCLUDE_PATH . 'log/'); # Log files are stored in the PHP include folder
 define('ADMIN_PATH', VIRTUAL_PATH . 'admin/'); # Admin files are in subfolder
-define('thom@kiseharrington.com', 'SUPPORT EMAIL GOES HERE'); # Email of site support
+define('SUPPORT_EMAIL', 'esteban@example.com'); # Email of site support
 define('PREFIX', 'wn19_'); #Adds uniqueness to DB table names.  Limits hackability, naming collisions.  In WordPress the prefix is wp_
 define('THIS_PAGE', basename($_SERVER['PHP_SELF'])); # Current page name, stripped of folder info - (saves resources)
 # END CONSTANTS & PATHS (universal file paths & values)--------------------------------------------------------------------
@@ -69,11 +68,19 @@ include INCLUDE_PATH . 'credentials_inc.php'; # Stores DB credentials - part of 
 include INCLUDE_PATH . 'common_inc.php'; # Provides common utility functions - part of nmCommon package
 include INCLUDE_PATH . 'custom_inc.php'; # Provides spot for custom utility functions - part of nmCommon package
 include INCLUDE_PATH . 'MyAutoLoader.php'; #Allows multiple versions of AutoLoaded classes
-//include INCLUDE_PATH . 'config-page-switch_inc.php'; varible settings for page display
 # END INCLUDES (reference include files)---------------------------------------------------------------------
 
 # CONTENT CONFIGURATION AREA (theme, content areas & nav arrays for header/footer )-----------------------------------------
-$config->theme = 'Bootswatch'; #default theme (header/footer combo) see 'Themes' folder for others and info (was Bootswatch)
+$config->theme = 
+	
+//'BlueBusiness';
+
+'Bootswatch';
+
+//'SmallPark';
+
+
+#default theme (header/footer combo) see 'Themes' folder for others and info
 $config->style = 'cerulean.css'; #currently only Bootswatch Theme uses style to switch look & feel
 $config->slogan = 'Cotlets are Awesome!';
 $config->metaDescription = 'Welcome to the Cotlets website.  We split off from Applets.  But We are better.';
@@ -104,6 +111,7 @@ $nav1['surveys/'] = "Surveys~The entrance to our Survey App";
 $nav1['demo/demo_shared.php'] = "Shared~A demo page for building mysqli shared connection based applications.";
 $nav1['demo/demo_pdo.php'] = "PDO~A demo page for building PDO connection based applications.";
 $nav1['demo/demo_contact.php'] = "Contact~A demo for building postback forms";
+$nav1['food/index.php'] = "Get Great Food Here!"; //
 $config->nav1 = $nav1;  #add to global config object - now available in all header/footers
 $config->tableEditor = ADMIN_PATH . 'nmEdit.php'; # Table Editor part of nmEdit package
 # CONTENT CONFIGURATION AREA (theme, content areas & nav arrays for header/footer )-----------------------------------------
@@ -323,8 +331,8 @@ $isOpen = fopen($fileName,$myMode);
   }
 }#End fileWrite()
 
-
-setlocale(LC_MONETARY,"en_US");
+//sets the number cast to correct currency format 
+setlocale(LC_MONETARY,"en_US.UTF-8"); // utf-8 standard
 
 # END ERROR HANDLING FUNCTIONS (error handling/logging functions)---------------------------------------------------------- 
 #no closing PHP tag, on purpose
