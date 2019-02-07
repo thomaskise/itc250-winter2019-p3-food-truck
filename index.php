@@ -84,7 +84,20 @@ function showForm()
             //echo '<p>Taco <input type="text" name="item_1" /></p>';
             echo '
             <tr>
-              <td><input type="text" name="item_' . $item->ID . '" /></td>
+              <td>  <select name="item_' .$item->ID . '">
+                        <option value=0>0</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                        <option value=6>6</option>
+                        <option value=7>7</option>
+                        <option value=8>8</option>
+                        <option value=9>9</option>
+                        <option value=10>10</option>
+                  </select>
+              </td>
               <td>' . $item->Name . '</td>
               <td>' .$item->Description . '</td>
               <td>' . $item->Price . '</td>
