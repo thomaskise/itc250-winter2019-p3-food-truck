@@ -24,8 +24,8 @@
  * @todo add more complicated checkbox & radio button examples
  */
 # '../' works for a sub-folder.  use './' for the root  
-require 'inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
-require 'inc_biz/biz_logic.php'; #provides business logic for subtotal, total calculation
+require '../inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
+require '../inc_0700/biz_logic.php'; #provides business logic for subtotal, total calculation
 require 'items.php'; 
 /*
 $config->metaDescription = 'Web Database ITC281 class website.'; #Fills <meta> tags.
@@ -64,7 +64,7 @@ function showForm()
 			return true;//if all is passed, submit!
 		}
 	</script>
-	<h3 align="center">' . smartTitle() . '</h3>
+	<h3 align="center">Order great food here!</h3>
 	<p align="center">Please select your items and submit your order</p>
     <BR />
     <BR />
@@ -123,7 +123,7 @@ function showData()
      get_header(); #defaults to footer_inc.php
 	
 	
-	echo '<h3 align="center">' . smartTitle() . '</h3>';
+	echo '<h3 align="center">Here is your order!</h3>';
 	
 	foreach($_POST as $name => $value)
     {//loop the form elements
