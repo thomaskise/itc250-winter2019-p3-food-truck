@@ -24,8 +24,8 @@
  * @todo add more complicated checkbox & radio button examples
  */
 # '../' works for a sub-folder.  use './' for the root  
-require '../inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
-require '../inc_0700/biz_logic.php'; #provides business logic for subtotal, total calculation
+require 'inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
+require 'inc_biz/biz_logic.php'; #provides business logic for subtotal, total calculation
 require 'items.php'; 
 /*
 $config->metaDescription = 'Web Database ITC281 class website.'; #Fills <meta> tags.
