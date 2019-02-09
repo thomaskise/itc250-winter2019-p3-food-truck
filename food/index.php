@@ -121,7 +121,7 @@ function showForm()
 					<input type="submit" value="Submit your order"><em>(<font color="red"><b>*</b> required field</font>)</em>
 				</p>
 		<input type="hidden" name="act" value="display" />
-	</form></div>
+	</form>
 	';
 	get_footer(); #defaults to footer_inc.php
 }
@@ -160,31 +160,73 @@ function showData()
 			
 	 		*/
 			//getItem() finds the parent-level array for an index $id -1 of the object.
-			$ItemDetails = getItem($id); 			
-			
+			$ItemDetails = getItem($id); 					
 			
 			#child level of object
 			//echo $ItemDetails->Price;
 			//var_dump($ItemDetails->Price);
-            
-			echo '</pre>';
-			
-			//Calculates subtotal using array child-level key
-			$mySubtotal = $value * $ItemDetails->Price;
-			
-            echo "<div class = "container"><p>You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at $ItemDetails->Price each. Your subtotal for this item is $mySubtotal </p></div>";
-			
-            echo "<div class = "container"><b><p>V2 You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at " . money_format('%n', $ItemDetails->Price) . " each. Your subtotal for this item is " . money_format('%n', $mySubtotal) . "</p></b></div>";
-            
-        }
+						
+			//Calculates items pre-tax subtotal using array child-level key and the $value variable from 
+			//the foreach() loop above.
+			$myItemSubtotal = getItemSubtotal($value, $ItemDetails->Price);						
+						
+			// Calculates the order pre-tax subtotal adding $myItemSubtotal on each loop
+			$myOrderSubtotal = getOrderSubtotal($myItemSubtotal);	
+			if ($value > 0)
+			{
+				echo '</pre>';
+
+				//Item line details below.
+				//@todo: each line item could be a column in a table, receipt-like.
+				echo "
+				<div class = \"container\">
+					<b><p>You ordered $value of item number $id, 
+					$ItemDetails->Name, 
+					$ItemDetails->Description, 
+					at " . money_format('%n', $ItemDetails->Price) . " each. 
+					Your subtotal for this item is <span style=\"color:red;\"> " . money_format('%n', $myItemSubtotal) . "</span>
+					</p></b>
+				</div> <!--container-->
+
+				";
+				
+			}else{			       
+
+				echo'';
+			}//end else
+								
+        }//end if(substr($name,0,5)=='item_')
         
         
-    }
+    }//end foreach
 	
+	if ($myOrderSubtotal > 0) //show totals
+	{
+		//block below is the totals section
+		//@todo: might want to add some styling to the totals. 
+
+		//echoes output from $myOrderSubtotal = getOrderSubtotal($myItemSubtotal); in the foreach loop		
+		echo "<b><p style=\"color:blue;\">This is your pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
+
+		//print order tax amount
+		$myTaxAmount = getTaxAmount($myOrderSubtotal); // change tax rate in "inc_0700/biz_logic.php"
+		echo "<b><p style=\"color:blue;\">This is the tax amount on your purchase: " . money_format('%n', $myTaxAmount) ."</p></b>";
+
+		//creates total with percentage added
+		$myTotal = getOrderTotal($myOrderSubtotal);
+		echo "<b><p style=\"color:blue;\">This is your order Total after taxes: " . money_format('%n', $myTotal) ."</p></b>";
+	}else{// redirect		       
+
+		echo '<script type="text/javascript">
+           window.location = "' . THIS_PAGE . '"
+      </script>';
+	}//end else
+
+
 	
-	
-	
+	//Go BACK link
 	echo '<p align="center"><a href="' . THIS_PAGE . '">RESET</a></p>';	
+	
 	get_footer(); #defaults to footer_inc.php
-}
+}//end showData()
 ?>
