@@ -172,9 +172,9 @@ function showData()
 			//Calculates subtotal using array child-level key
 			$mySubtotal = $value * $ItemDetails->Price;
 			
-            echo "<p>You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at $ItemDetails->Price each. Your subtotal for this item is $mySubtotal </p>";
+            echo "<div class = "container"><p>You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at $ItemDetails->Price each. Your subtotal for this item is $mySubtotal </p></div>";
 			
-            echo "<b><p>V2 You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at " . money_format('%n', $ItemDetails->Price) . " each. Your subtotal for this item is " . money_format('%n', $mySubtotal) . "</p></b>";
+            echo "<div class = "container"><b><p>V2 You ordered $value of item number $id, $ItemDetails->Name, $ItemDetails->Description, at " . money_format('%n', $ItemDetails->Price) . " each. Your subtotal for this item is " . money_format('%n', $mySubtotal) . "</p></b></div>";
             
         }
         
