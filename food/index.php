@@ -24,9 +24,15 @@
  * @todo add more complicated checkbox & radio button examples
  */
 # '../' works for a sub-folder.  use './' for the root  
+# include('p3table.css');
 require '../inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
 require '../inc_0700/biz_logic.php'; #provides business logic for subtotal, total calculation
 require 'items.php'; 
+echo '
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>';
 /*
 $config->metaDescription = 'Web Database ITC281 class website.'; #Fills <meta> tags.
 $config->metaKeywords = 'SCCC,Seattle Central,ITC281,database,mysql,php';
@@ -64,6 +70,7 @@ function showForm()
 			return true;//if all is passed, submit!
 		}
 	</script>
+	<div = "container">
 	<h3 align="center">Order great food here!</h3>
 	<p align="center">Please select your items and submit your order</p>
     <BR />
@@ -71,7 +78,9 @@ function showForm()
     <BR />
 	<form action="' . THIS_PAGE . '" method="post" onsubmit="return checkForm(this);">
              ';
-  echo '<table>
+  echo '
+  <div class = "table-responsive">
+  	<table class = "table">
         <tr>
             <th>Quantity</th>
             <th>Item</th>
@@ -105,14 +114,14 @@ function showForm()
               //echo '<p>' . $item->Name . ' <input type="text" name="item_' . $item->ID . '" /></p>';
               
           }  
-          echo '</table>';
+          echo '</table></div>';
  
           echo '
 				<p>
 					<input type="submit" value="Submit your order"><em>(<font color="red"><b>*</b> required field</font>)</em>
 				</p>
 		<input type="hidden" name="act" value="display" />
-	</form>
+	</form></div>
 	';
 	get_footer(); #defaults to footer_inc.php
 }
