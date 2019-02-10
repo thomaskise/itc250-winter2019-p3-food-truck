@@ -45,7 +45,7 @@ function showForm()
 	global $config;
 
 	echo 
-	'<script type="text/javascript" src="' . VIRTUAL_PATH . 'include/util.js"></script>
+	'<script type="text/javascript" src="include/util.js"></script>
 	<script type="text/javascript">
 		function checkForm(thisForm)
 		{//check form data for valid info
