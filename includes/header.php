@@ -1,3 +1,4 @@
+
 <?php
 /**
  * header_inc.php provides the initial HTML for our site files 
@@ -31,3 +32,5 @@
 	<style type="text/css">
     </style>
 </head>
+
+		<!-- end of header include file -->
