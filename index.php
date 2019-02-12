@@ -61,19 +61,33 @@ function showForm()
     <BR />
 	<form action="' . THIS_PAGE . '" method="post" onsubmit="return checkForm(this);">
              ';
-  echo '
-  <div class = "table-responsive">
-  	<table class = "table">
-        <tr>
-            <th>Quantity</th>
-            <th>Item</th>
-            <th>Description</th>
-            <th>Price</th>
-        </tr>';
+      echo '
+      <div class = "table-responsive">
+        <table class = "table">
+            <tr>
+                <th>Quantity</th>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>';
+    
 		foreach($config->items as $item)
           {
             //echo "<p>ID:$item->ID  Name:$item->Name</p>"; 
             //echo '<p>Taco <input type="text" name="item_1" /></p>';
+            echo '
+            <tr>
+              <td>  
+                <input type="number"  name="item_' .$item->ID . '" min="0" max="50">
+              </td>
+              <td>' . $item->Name . '</td>
+              <td>' .$item->Description . '</td>
+              <td>' . money_format('%n', $item->Price) . '</td>
+            </tr>';
+            
+            
+            
+            /*OLD FORM HTML
             echo '
             <tr>
               <td>  <select name="item_' .$item->ID . '">
@@ -94,6 +108,7 @@ function showForm()
               <td>' .$item->Description . '</td>
               <td>' . money_format('%n', $item->Price) . '</td>
             </tr>';
+            END OLD FORM HTML*/
               //echo '<p>' . $item->Name . ' <input type="text" name="item_' . $item->ID . '" /></p>';
               
           }  
@@ -115,7 +130,21 @@ function showData()
 	
 	
 	echo '<h3 align="center">Here is your order!</h3>';
-	
+    echo'
+            <div class = "table-responsive">
+            <table class = "table">
+                <thead>
+                <tr>
+                  <th>Item #</th>
+                  <th>Quantity</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Subtotal</th>
+                </tr>
+                </thead>
+                <tbody>';
+    
 	foreach($_POST as $name => $value)
     {//loop the form elements
         
@@ -156,47 +185,73 @@ function showData()
 			$myOrderSubtotal = getOrderSubtotal($myItemSubtotal);	
 			if ($value > 0)
 			{
+                //Function gets either the $this->SingularName or the $this->PluralName from the Item class
+                $myItemName = getPluralName($value, $ItemDetails->SingularName, $ItemDetails->PluralName);
+                    
 				echo '</pre>';
 
 				//Item line details below.
 				//@todo: each line item could be a column in a table, receipt-like.
-				echo "
+                    
+				/*echo "
 				<div class = \"container\">
-					<b><p>You ordered $value of item number $id, 
-					$ItemDetails->Name, 
-					$ItemDetails->Description, 
-					at " . money_format('%n', $ItemDetails->Price) . " each. 
-					Your subtotal for this item is <span style=\"color:red;\"> " . money_format('%n', $myItemSubtotal) . "</span>
-					</p></b>
+					<b><p>Item number: $id. </p>
+                    <p>Quantity Ordered: $value. </p>
+                    <p>Item Name: $myItemName. </p>
+                    <p>Item Description: $ItemDetails->Description. </p>
+					<p>Item Price: " . money_format('%n', $ItemDetails->Price) . ". </p>
+					<p>Item Order Subtotal: <span style=\"color:red;\"> " . money_format('%n', $myItemSubtotal) . "</span></p>
+					</b>
 				</div> <!--container-->
 
-				";
-				
+				";*/
+                echo "
+                        <tr>
+                          <td>$id</td>
+                          <td>$value</td>
+                          <td>$myItemName</td>
+                          <td>$ItemDetails->Description</td>
+                          <td>" . money_format('%n', $ItemDetails->Price) . "</td>
+                          <td>" . money_format('%n', $myItemSubtotal) . "</td>
+                        </tr>                  
+                    ";
+                
 			}else{			       
 
 				echo'';
-			}//end else
+			}//end if / else if ($value > 0)
 								
         }//end if(substr($name,0,5)=='item_')
         
         
     }//end foreach
+    
+    echo'    </tbody>
+            </table>
+            </div>';
 	
 	if ($myOrderSubtotal > 0) //show totals
 	{
 		//block below is the totals section
 		//@todo: might want to add some styling to the totals. 
 
-		//echoes output from $myOrderSubtotal = getOrderSubtotal($myItemSubtotal); in the foreach loop		
-		echo "<b><p style=\"color:blue;\">This is your pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
+		//echoes output from cumulative total via the getOrderSubtotal($myItemSubtotal); function in the foreach loop
+        echo '<div class="container">';
+        
+		echo "<b><p style=\"color:blue;\">Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
 
 		//print order tax amount
-		$myTaxAmount = getTaxAmount($myOrderSubtotal); // change tax rate in "inc_0700/biz_logic.php"
-		echo "<b><p style=\"color:blue;\">This is the tax amount on your purchase: " . money_format('%n', $myTaxAmount) ."</p></b>";
+		$myTaxAmount = getTaxAmount($myOrderSubtotal); // change tax rate in 'includes/config.php'
+		echo "<b><p style=\"color:blue;\">Tax amount: " . money_format('%n', $myTaxAmount) ."</p></b>";
+        
+        //$percentTaxRate is defined in 'includes/config.php' 
+		echo "<b><p style=\"color:blue;\">Tax Rate: " . money_format('%n', $percentTaxRate) ."</p></b>";      
 
 		//creates total with percentage added
 		$myTotal = getOrderTotal($myOrderSubtotal);
-		echo "<b><p style=\"color:blue;\">This is your order Total after taxes: " . money_format('%n', $myTotal) ."</p></b>";
+		echo "<b><p style=\"color:blue;\">Order Total: " . money_format('%n', $myTotal) ."</p></b>";
+        
+        echo '</div>';
 	}else{// redirect		       
 
 		echo '<script type="text/javascript">
