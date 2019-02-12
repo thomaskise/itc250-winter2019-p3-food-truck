@@ -19,7 +19,6 @@ function getItem($id)
 	return $myArray;
 }
 
-
 // getItemSubtotal($ItemQuantity, $ItemPrice) Takes the quantity of items and item price as parameters. returns an item subtotal, pre-tax.
 
 function getItemSubtotal($ItemQuantity, $ItemPrice)
@@ -42,7 +41,7 @@ function getOrderSubtotal($lineSubtotal)
 }
 
 
-//  getTaxAmount($preTaxAmount) and getTotal($preTaxAmount) use the following variables: $percentTaxRate & $decimalTaxRate.
+//  getTaxAmount($preTaxAmount) and getTot';al($preTaxAmount) use the following variables: $percentTaxRate & $decimalTaxRate.
 
 //ENTER tax rate as the percentage number. Example: if the taxrate is 10%, enter 10.
 $percentTaxRate = 9.3; //Seattle restaurant tax is 9.3%	
@@ -66,18 +65,35 @@ function getOrderTotal($preTaxAmount)
 }
 
 
+//Function gets either the $this->SingularName or the $this->PluralName from the Item class
+function getPluralName($quantity, $singleName, $pluralName)
+{    
+    if ($quantity == 1)
+    {
+        $ItemName = $singleName;
+        return $ItemName;
+    }
+    elseif ($quantity >1){
+        $ItemName = $pluralName;
+        return $ItemName;
+    } // END if/else
+}
+
+
 class Item
 {
     public $ID = 0;
-    public $Name = '';
+    public $SingularName = '';
+    public $PluralName = '';
     public $Description = '';
     public $Price = 0;
     public $Extras = array();
     
-    public function __construct($ID,$Name,$Description,$Price)
+    public function __construct($ID,$SingularName,$PluralName,$Description,$Price)
     {
         $this->ID = $ID;
-        $this->Name = $Name;
+        $this->SingularName = $SingularName;
+        $this->PluralName = $PluralName;
         $this->Description = $Description;
         $this->Price = $Price;
         

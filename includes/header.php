@@ -31,5 +31,3 @@
 	<style type="text/css">
     </style>
 </head>
-
-		<!-- end of header include file -->
