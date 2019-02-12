@@ -44,7 +44,10 @@ html {
 }
 
 body {
-  margin: 0;
+  margin: 10%;
+  text-align: center;
+  border-style: inset; 
+  background-color: #f5f5dc;
 }
 
 a {
@@ -307,7 +310,8 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
-  background-color: #ffffff;
+  background-image: url('../images/foodtruck.jpg');
+  background-repeat: repeat;
 }
 
 input,
