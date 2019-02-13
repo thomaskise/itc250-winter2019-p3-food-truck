@@ -47,6 +47,13 @@ function getOrderSubtotal($lineSubtotal)
 $percentTaxRate = 9.3; //Seattle restaurant tax is 9.3%	
 $decimalTaxRate = $percentTaxRate / 100;
 
+function getPercentRate()
+{
+    global $percentTaxRate;
+    $taxPercent = round((float)$percentTaxRate, 2);
+    return $taxPercent;
+}
+
 function getTaxAmount($preTaxAmount)
 {
 	global $decimalTaxRate;
