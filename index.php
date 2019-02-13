@@ -45,7 +45,7 @@ function showForm()
 	global $config;
 
 	echo '
-	<div = "container">
+	<div class="container">
 	<h3 align="center">Order great food here!</h3>
 	<p align="center">Please select your items and submit your order</p>
     <BR />
