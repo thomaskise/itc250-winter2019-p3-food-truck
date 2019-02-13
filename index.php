@@ -115,8 +115,7 @@ function showForm()
           echo ' 
         </tbody>
      </table>
-</div>
-</div>
+</div>  <!--DivTable Responsive-->  
           ';
  
           echo '
@@ -125,6 +124,7 @@ function showForm()
 				</p>
 		<input type="hidden" name="act" value="display" />
 	</form>
+</div><!--Div Container-->
 	';
 	include 'includes/footer.php';
 }
