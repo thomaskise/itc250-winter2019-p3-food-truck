@@ -249,7 +249,8 @@ function showData()
 		echo "<b><p style=\"color:blue;\">Tax amount: " . money_format('%n', $myTaxAmount) ."</p></b>";
         
         //$percentTaxRate is defined in 'includes/config.php' 
-		echo "<b><p style=\"color:blue;\">Tax Rate: " . money_format('%n', $percentTaxRate) ."</p></b>";      
+        $myTaxPercent = getPercentRate();
+		echo "<b><p style=\"color:blue;\">Tax Rate: " . $myTaxPercent . "%</p></b>";      
 
 		//creates total with percentage added
 		$myTotal = getOrderTotal($myOrderSubtotal);
