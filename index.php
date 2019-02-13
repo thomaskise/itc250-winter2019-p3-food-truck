@@ -84,7 +84,7 @@ function showForm()
                 <input type="number"  name="item_' .$item->ID . '" min="0" max="50" step="0" value="0">
 		</div>
               </td>
-              <td>' . $item->Name . '</td>
+              <td>' . $item->SingularName . '</td>
               <td>' .$item->Description . '</td>
               <td>' . money_format('%n', $item->Price) . '</td>
             </tr>';
