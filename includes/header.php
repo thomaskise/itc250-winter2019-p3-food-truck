@@ -3,14 +3,9 @@
 /**
  * header_inc.php provides the initial HTML for our site files 
  *
- * @package nmCommon
- * @author Bill Newman <williamnewman@gmail.com>
- * @version 2.091 2011/06/17
- * @link http://www.newmanix.com/ 
+ * @author itc250 winter2019 group project 3
+ * @version 1.0 2019-02-14
  * @license https://www.apache.org/licenses/LICENSE-2.0
- * @see meta_inc.php
- * @see footer_inc.php 
- * @todo none
  */
 ?>
 <!DOCTYPE html>
@@ -28,18 +23,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    	<script src="indexselector.js"></script>
-	<script type="text/javascript" src="include/util.js"></script>
-	<script type="text/javascript">
-		function checkForm(thisForm)
-		{//check form data for valid info
-			if(empty(thisForm.YourName,"Please Enter Your Name")){return false;}
-			return true;//if all is passed, submit!
-		}
-	</script>
+    <script src="indexselector.js"></script>
+	<script src="include/util.js"></script>
 <!--	<link href="css/p3table.css" rel="stylesheet" type="text/css" />-->
-	<style type="text/css">
-    </style>
 </head>
 <body>
 
