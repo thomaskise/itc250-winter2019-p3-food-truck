@@ -45,15 +45,6 @@ function showForm()
 	global $config;
 
 	echo '
-	<script src="indexselector.js"></script>
-	<script type="text/javascript" src="include/util.js"></script>
-	<script type="text/javascript">
-		function checkForm(thisForm)
-		{//check form data for valid info
-			if(empty(thisForm.YourName,"Please Enter Your Name")){return false;}
-			return true;//if all is passed, submit!
-		}
-	</script>
 	<div = "container">
 	<h3 align="center">Order great food here!</h3>
 	<p align="center">Please select your items and submit your order</p>
