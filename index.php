@@ -75,10 +75,50 @@ function showForm()
           {
             //echo "<p>ID:$item->ID  Name:$item->Name</p>"; 
             //echo '<p>Taco <input type="text" name="item_1" /></p>';
+	    echo '
+	    <script type='text/javascript'>
+	    jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
+    		jQuery('.quantity').each(function() {
+      		var spinner = jQuery(this),
+       		input = spinner.find('input[type="number"]'),
+        	btnUp = spinner.find('.quantity-up'),
+        	btnDown = spinner.find('.quantity-down'),
+        	min = input.attr('min'),
+        	max = input.attr('max');
+
+     	    btnUp.click(function() {
+        	var oldValue = parseFloat(input.val());
+       		if (oldValue >= max) {
+         	var newVal = oldValue;
+           } else {
+          	var newVal = oldValue + 1;
+           }
+        	spinner.find("input").val(newVal);
+        	spinner.find("input").trigger("change");
+      	});
+
+      	    btnDown.click(function() {
+       		var oldValue = parseFloat(input.val());
+        	if (oldValue <= min) {
+         	 var newVal = oldValue;
+           } else {
+          	var newVal = oldValue - 1;
+          }
+        	spinner.find("input").val(newVal);
+       	 	spinner.find("input").trigger("change");
+      });
+
+    });
+	    </script>
+	    ';
+			
+			
             echo '
             <tr>
               <td>  
-                <input type="number"  name="item_' .$item->ID . '" min="0" max="50">
+	      <div class="quantity">
+                <input type="number"  name="item_' .$item->ID . '" min="0" max="50" step="0" value="0">
+		</div>
               </td>
               <td>' . $item->Name . '</td>
               <td>' .$item->Description . '</td>
