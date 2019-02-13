@@ -115,7 +115,8 @@ function showForm()
           echo ' 
         </tbody>
      </table>
-</div>     
+</div>
+</div>
           ';
  
           echo '
