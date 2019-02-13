@@ -28,9 +28,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    	<script src="indexselector.js"></script>
+	<script type="text/javascript" src="include/util.js"></script>
+	<script type="text/javascript">
+		function checkForm(thisForm)
+		{//check form data for valid info
+			if(empty(thisForm.YourName,"Please Enter Your Name")){return false;}
+			return true;//if all is passed, submit!
+		}
+	</script>
 <!--	<link href="css/p3table.css" rel="stylesheet" type="text/css" />-->
 	<style type="text/css">
     </style>
 </head>
+<body>
 
 		<!-- end of header include file -->

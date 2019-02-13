@@ -3,7 +3,6 @@ include 'includes/header.php'; #provides configuration, pathing, error handling,
 include 'includes/config.php'; #provides configuration, pathing, error handling, db credentials
 include 'includes/biz_logic.php'; #provides business logic for subtotal, total calculation
 include 'includes/items.php'; #provides business logic for subtotal, total calculation
-
 /**
  * item-demo2.php, based on demo_postback_nohtml.php is a single page web application that allows us to request and view 
  * a customer's name
@@ -28,7 +27,6 @@ include 'includes/items.php'; #provides business logic for subtotal, total calcu
  * @todo finish instruction sheet
  * @todo add more complicated checkbox & radio button examples
  */
-
 //END CONFIG AREA ----------------------------------------------------------
 # Read the value of 'action' whether it is passed via $_POST or $_GET with $_REQUEST
 if(isset($_REQUEST['act'])){$myAction = (trim($_REQUEST['act']));}else{$myAction = "";}
@@ -43,18 +41,8 @@ switch ($myAction)
 function showForm()
 {# shows form so user can enter their name.  Initial scenario
 	global $config;
-
 	echo '
-	<script src="indexselector.js"></script>
-	<script type="text/javascript" src="include/util.js"></script>
-	<script type="text/javascript">
-		function checkForm(thisForm)
-		{//check form data for valid info
-			if(empty(thisForm.YourName,"Please Enter Your Name")){return false;}
-			return true;//if all is passed, submit!
-		}
-	</script>
-	<div = "container">
+	<div class="container">
 	<h3 align="center">Order great food here!</h3>
 	<p align="center">Please select your items and submit your order</p>
     <BR />
@@ -124,7 +112,7 @@ function showForm()
           echo ' 
         </tbody>
      </table>
-</div>     
+</div>  <!--DivTable Responsive-->  
           ';
  
           echo '
@@ -133,6 +121,7 @@ function showForm()
 				</p>
 		<input type="hidden" name="act" value="display" />
 	</form>
+</div><!--Div Container-->
 	';
 	include 'includes/footer.php';
 }
@@ -202,7 +191,6 @@ function showData()
                 $myItemName = getPluralName($value, $ItemDetails->SingularName, $ItemDetails->PluralName);
                     
 				echo '</pre>';
-
 				//Item line details below.
 				//@todo: each line item could be a column in a table, receipt-like.
                     
@@ -216,7 +204,6 @@ function showData()
 					<p>Item Order Subtotal: <span style=\"color:red;\"> " . money_format('%n', $myItemSubtotal) . "</span></p>
 					</b>
 				</div> <!--container-->
-
 				";*/
                 echo "
                         <tr>
@@ -230,7 +217,6 @@ function showData()
                     ";
                 
 			}else{			       
-
 				echo'';
 			}//end if / else if ($value > 0)
 								
@@ -247,12 +233,10 @@ function showData()
 	{
 		//block below is the totals section
 		//@todo: might want to add some styling to the totals. 
-
 		//echoes output from cumulative total via the getOrderSubtotal($myItemSubtotal); function in the foreach loop
         echo '<div class="container">';
         
 		echo "<b><p style=\"color:blue;\">Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
-
 		//print order tax amount
 		$myTaxAmount = getTaxAmount($myOrderSubtotal); // change tax rate in 'includes/config.php'
 		echo "<b><p style=\"color:blue;\">Tax amount: " . money_format('%n', $myTaxAmount) ."</p></b>";
@@ -260,20 +244,16 @@ function showData()
         //$percentTaxRate is defined in 'includes/config.php' 
         $myTaxPercent = getPercentRate();
 		echo "<b><p style=\"color:blue;\">Tax Rate: " . $myTaxPercent . "%</p></b>";      
-
 		//creates total with percentage added
 		$myTotal = getOrderTotal($myOrderSubtotal);
 		echo "<b><p style=\"color:blue;\">Order Total: " . money_format('%n', $myTotal) ."</p></b>";
         
         echo '</div>';
 	}else{// redirect		       
-
 		echo '<script type="text/javascript">
            window.location = "' . THIS_PAGE . '"
       </script>';
 	}//end else
-
-
 	
 	//Go BACK link
 	echo '<p align="center"><a href="' . THIS_PAGE . '">RESET</a></p>';	
