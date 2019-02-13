@@ -41,5 +41,6 @@
 	<style type="text/css">
     </style>
 </head>
+<body>
 
 		<!-- end of header include file -->
