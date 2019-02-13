@@ -63,31 +63,36 @@ function showForm()
 	<form action="' . THIS_PAGE . '" method="post" onsubmit="return checkForm(this);">
              ';
       echo '
-      <div class = "table-responsive">
-        <table class = "table">
-            <tr>
-                <th>Quantity</th>
-                <th>Item</th>
-                <th>Description</th>
-                <th>Price</th>
-            </tr>';
+    <div class = "table-responsive">
+         <table class = "table">
+            <thead>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>      
+             ';
     
 		foreach($config->items as $item)
           {
             //echo "<p>ID:$item->ID  Name:$item->Name</p>"; 
             //echo '<p>Taco <input type="text" name="item_1" /></p>';
 	
-            echo '
+            echo '         
             <tr>
-              <td>  
-	      <div class="quantity">
-                <input type="number"  name="item_' .$item->ID . '" min="0" max="50" step="0" value="0">
-		</div>
-              </td>
-              <td>' . $item->SingularName . '</td>
-              <td>' .$item->Description . '</td>
-              <td>' . money_format('%n', $item->Price) . '</td>
-            </tr>';
+                <td>  
+                    <div class="quantity">
+                        <input type="number"  name="item_' .$item->ID . '" min="0" max="50" step="1" value="0">
+                    </div>
+                </td>
+                <td>' . $item->SingularName . '</td>
+                <td>' .$item->Description . '</td>
+                <td>' . money_format('%n', $item->Price) . '</td>
+            </tr>       
+            ';
             
             
             
@@ -116,7 +121,11 @@ function showForm()
               //echo '<p>' . $item->Name . ' <input type="text" name="item_' . $item->ID . '" /></p>';
               
           }  
-          echo '</table></div>';
+          echo ' 
+        </tbody>
+     </table>
+</div>     
+          ';
  
           echo '
 				<p>
