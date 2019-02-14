@@ -43,8 +43,8 @@ function showForm()
 	global $config;
 	echo '
 	<div class="container">
-	<h3 align="center">Order great food here!</h3>
-	<p align="center">Please select your items and submit your order</p>
+	<h3 style = "text-align: center;">Order great food here!</h3>
+	<p style = "text-align: center;">Please select your items and submit your order</p>
     <BR />
     <BR />
     <BR />
@@ -117,7 +117,7 @@ function showForm()
  
           echo '
 				<p>
-					<input type="submit" value="Submit your order"><em>(<font color="red"><b>*</b> required field</font>)</em>
+					<input type="submit" value="Submit your order">
 				</p>
 		<input type="hidden" name="act" value="display" />
 	</form>
@@ -256,7 +256,7 @@ function showData()
 	}//end else
 	
 	//Go BACK link
-	echo '<p align="center"><a href="' . THIS_PAGE . '">RESET</a></p>';	
+	echo '<p style = "text-align: center;"><a href="' . THIS_PAGE . '">ORDER AGAIN</a></p>';	
 	
 	include 'includes/footer.php'; #defaults to footer_inc.php
 }//end showData()
