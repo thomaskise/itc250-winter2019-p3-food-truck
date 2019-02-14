@@ -65,9 +65,7 @@ function showForm()
              ';
     
 		foreach($config->items as $item)
-          {
-            //echo "<p>ID:$item->ID  Name:$item->Name</p>"; 
-            //echo '<p>Taco <input type="text" name="item_1" /></p>';
+          {//create form looping through each object property
 	
             echo '         
             <tr>
@@ -80,41 +78,15 @@ function showForm()
                 <td>' .$item->Description . '</td>
                 <td>' . money_format('%n', $item->Price) . '</td>
             </tr>       
-            ';
-            
-            
-            
-            /*OLD FORM HTML
-            echo '
-            <tr>
-              <td>  <select name="item_' .$item->ID . '">
-                        <option value=0>0</option>
-                        <option value=1>1</option>
-                        <option value=2>2</option>
-                        <option value=3>3</option>
-                        <option value=4>4</option>
-                        <option value=5>5</option>
-                        <option value=6>6</option>
-                        <option value=7>7</option>
-                        <option value=8>8</option>
-                        <option value=9>9</option>
-                        <option value=10>10</option>
-                  </select>
-              </td>
-              <td>' . $item->Name . '</td>
-              <td>' .$item->Description . '</td>
-              <td>' . money_format('%n', $item->Price) . '</td>
-            </tr>';
-            END OLD FORM HTML*/
-              //echo '<p>' . $item->Name . ' <input type="text" name="item_' . $item->ID . '" /></p>';
-              
-          }  
+            ';              
+          }//END Foreach  
+    
           echo ' 
         </tbody>
      </table>
 </div>  <!--DivTable Responsive-->  
           ';
- 
+            //
           echo '
 				<p>
 					<input type="submit" value="Submit your order">
@@ -158,26 +130,11 @@ function showData()
             //id is the second element of the array
 			//forcibly cast to an int in the process
             $id = (int)$name_array[1];
-			/*
-				Here is where you'll do most of your work
-				Use $id to loop your array of items and return 
-				item data such as price.
-				
-				Consider creating a function to return a specific item 
-				from your items array, for example:
-				
-				$thisItem = getItem($id);
-				
-				Use $value to determine the number of items ordered 
-				and create subtotals, etc.
-			
-	 		*/
+
 			//getItem() finds the parent-level array for an index $id -1 of the object.
 			$ItemDetails = getItem($id); 					
 			
 			#child level of object
-			//echo $ItemDetails->Price;
-			//var_dump($ItemDetails->Price);
 						
 			//Calculates items pre-tax subtotal using array child-level key and the $value variable from 
 			//the foreach() loop above.
@@ -191,20 +148,7 @@ function showData()
                 $myItemName = getPluralName($value, $ItemDetails->SingularName, $ItemDetails->PluralName);
                     
 				echo '</pre>';
-				//Item line details below.
-				//@todo: each line item could be a column in a table, receipt-like.
-                    
-				/*echo "
-				<div class = \"container\">
-					<b><p>Item number: $id. </p>
-                    <p>Quantity Ordered: $value. </p>
-                    <p>Item Name: $myItemName. </p>
-                    <p>Item Description: $ItemDetails->Description. </p>
-					<p>Item Price: " . money_format('%n', $ItemDetails->Price) . ". </p>
-					<p>Item Order Subtotal: <span style=\"color:red;\"> " . money_format('%n', $myItemSubtotal) . "</span></p>
-					</b>
-				</div> <!--container-->
-				";*/
+				//Item line details below.                    
                 echo "
                         <tr>
                           <td>$id</td>
