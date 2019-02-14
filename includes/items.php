@@ -1,10 +1,14 @@
 <?php
-//items.php just a list
+/**
+ * items.php just a list of menu items
+ *
+ * the menu items are processed into the Class Item array  in biz_logic.php
+ */
 
 
 /*
 *
-*   Class structure
+*   Class structure for reference 
     public $ID = 0;
     public $SingularName = '';
     public $PluralName = '';
