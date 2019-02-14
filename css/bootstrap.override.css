@@ -1,0 +1,12 @@
+<--bootstrapoverride-->
+
+body {
+ margin: 10%;
+ text-align: center;
+ background-image: url('../images/foodtruck.jpg');
+ background-repeat: repeat;
+}
+
+.container {
+    background-color: #f5f5dc;
+}
