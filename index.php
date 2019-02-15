@@ -94,7 +94,8 @@ function showForm()
 		<input type="hidden" name="act" value="display" />
 	</form>
 </div><!--Div Container-->
-	';
+	';        
+    
 	include 'includes/footer.php';
 }
 function showData()
@@ -191,11 +192,9 @@ function showData()
 		$myTotal = getOrderTotal($myOrderSubtotal);
 		echo "<b><p style=\"color:blue;\">Order Total: " . money_format('%n', $myTotal) ."</p></b>";
         
-	}else{// redirect		       
-		echo '<script type="text/javascript">
-           window.location = "' . THIS_PAGE . '"
-      </script>';
-	}//end else
+	}else{//if form submitted with no items, propmt user to choose some items.
+        echo 'Please add an item to your cart';
+    }
 	
 	//Go BACK link
 	echo '<p style = "text-align: center;"><a href="' . THIS_PAGE . '">ORDER AGAIN</a></p>';	
