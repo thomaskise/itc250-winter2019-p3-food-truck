@@ -14,17 +14,17 @@
 
 
 /**
- * getItem($id) returns the array $myArray located at $config->items[$index] 
+ * getItem($id) returns the array $myArray located at $config->items[$index]
  */
 function getItem($id)
-{	
-	global $config;
-	$index = $id -1 ;
-		
-	//var_dump($config->items[$index]); // loads all arrays inside an array	
-	#Parent level of object
-	$myArray = $config->items[$index]; //Create an array with values of object indexed at $index	
-	return $myArray;
+{
+    global $config;
+    $index = $id -1 ;
+
+    //var_dump($config->items[$index]); // loads all arrays inside an array
+    #Parent level of object
+    $myArray = $config->items[$index]; //Create an array with values of object indexed at $index
+    return $myArray;
 }
 
 /**
@@ -34,8 +34,8 @@ function getItem($id)
 
 function getItemSubtotal($ItemQuantity, $ItemPrice)
 {
-	$itemSubTotal = $ItemQuantity * $ItemPrice;
-	return $itemSubTotal;	// cast as currency
+    $itemSubTotal = $ItemQuantity * $ItemPrice;
+    return $itemSubTotal;    // cast as currency
 }
 
 /**
@@ -48,9 +48,9 @@ $orderSubtotal = 0;
 
 function getOrderSubtotal($lineSubtotal)
 {
-	global $orderSubtotal;
-	$orderSubtotal =  $orderSubtotal + $lineSubtotal;
-	return $orderSubtotal;	// cast as currency
+    global $orderSubtotal;
+    $orderSubtotal =  $orderSubtotal + $lineSubtotal;
+    return $orderSubtotal;    // cast as currency
 }
 
 /**
@@ -58,7 +58,7 @@ function getOrderSubtotal($lineSubtotal)
  * ENTER tax rate as the percentage number. Example: if the taxrate is 10%, enter 10.
  */
 
-$percentTaxRate = 9.3; //Seattle restaurant tax is 9.3%	
+$percentTaxRate = 9.3; //Seattle restaurant tax is 9.3%
 $decimalTaxRate = $percentTaxRate / 100;
 
 function getPercentRate()
@@ -73,9 +73,9 @@ function getPercentRate()
  */
 function getTaxAmount($preTaxAmount)
 {
-	global $decimalTaxRate;
-	$taxAmount = $decimalTaxRate * $preTaxAmount;
-	return $taxAmount;
+    global $decimalTaxRate;
+    $taxAmount = $decimalTaxRate * $preTaxAmount;
+    return $taxAmount;
 }
 
 /**
@@ -85,26 +85,24 @@ function getTaxAmount($preTaxAmount)
 
 function getOrderTotal($preTaxAmount)
 {
-	global $decimalTaxRate;	
-	
-	$decimalFactor = 1+ $decimalTaxRate;		
-	$withTaxAmount = $decimalFactor * $preTaxAmount;
-	return $withTaxAmount;		
+    global $decimalTaxRate;
+
+    $decimalFactor = 1+ $decimalTaxRate;
+    $withTaxAmount = $decimalFactor * $preTaxAmount;
+    return $withTaxAmount;
 }
 
 /**
- * getPluralName($quantity, $singleName, $pluralName) gets either the $this->SingularName or 
+ * getPluralName($quantity, $singleName, $pluralName) gets either the $this->SingularName or
  * the $this->PluralName from the Item class
  */
 
 function getPluralName($quantity, $singleName, $pluralName)
-{    
-    if ($quantity == 1)
-    {
+{
+    if ($quantity == 1) {
         $ItemName = $singleName;
         return $ItemName;
-    }
-    elseif ($quantity >1){
+    } elseif ($quantity >1) {
         $ItemName = $pluralName;
         return $ItemName;
     } // END if/else
@@ -122,20 +120,18 @@ class Item
     public $Description = '';
     public $Price = 0;
     public $Extras = array();
-    
-    public function __construct($ID,$SingularName,$PluralName,$Description,$Price)
+
+    public function __construct($ID, $SingularName, $PluralName, $Description, $Price)
     {
         $this->ID = $ID;
         $this->SingularName = $SingularName;
         $this->PluralName = $PluralName;
         $this->Description = $Description;
         $this->Price = $Price;
-        
     }#end Item constructor
     // future for adding extras to menu items
     public function addExtra($extra)
     {
         $this->Extras[] = $extra;
-        
     }#end addExtra()
 }#end Item class
