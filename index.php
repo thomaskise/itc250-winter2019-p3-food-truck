@@ -204,7 +204,8 @@ function showData()
  * @todo: might want to add some styling to the totals.
  * echoes output from cumulative total via the getOrderSubtotal($myItemSubtotal);
  */
-    if ($myOrderSubtotal > 0) { //show totals   echo "<b><p style=\"color:blue;\">Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
+    if ($myOrderSubtotal > 0) { //show totals   
+      echo "<b><p style=\"color:blue;\">Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
      /*
  * print order tax amount
  */
