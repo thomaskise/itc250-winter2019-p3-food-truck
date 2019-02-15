@@ -2,10 +2,12 @@
 <?php
 /**
  * header_inc.php provides the initial HTML for our site files 
- *
+ * Title of page "Food Truck" and Bootstrap CSS included here from CSS folder. 
  * @author itc250 winter2019 group project 3
  * @version 1.0 2019-02-14
  * @license https://www.apache.org/licenses/LICENSE-2.0
+ 
+ 
  */
 ?>
 <!DOCTYPE html>
