@@ -1,7 +1,7 @@
 <?php
 /**
  * header_inc.php provides the initial HTML for our site files 
- *
+ * Footer includes copyright and W3 validator. 
  * @author itc250 winter2019 group project 3
  * @version 1.0 2019-02-14
  * @license https://www.apache.org/licenses/LICENSE-2.0
