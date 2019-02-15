@@ -7,29 +7,43 @@
  * @author Jeneva Scherr j3j3sherr@yahoo.com
  * @author Thom Harrrington thomas.harrington@seattlecentral.edu
  * @author Yonatan Gebreyesus yonatangebreyesus@gmail.com
- *  @version 1.0 2019-02-14
- *  @license https://www.apache.org/licenses/LICENSE-2.0
+ * @version 1.0 2019-02-14
+ * @license https://www.apache.org/licenses/LICENSE-2.0
  * @todo none
  */
 
-
 /**
- * getItem($id) returns the array $myArray located at $config->items[$index]
+ *  processes items on list into an array
+ *
+ * <code>
+ *   ItemDetails = getItem($id);
+ * </code>
+ * * @param int $id is the item number
+ * @return array $myArray of all the items and their paramters on the item list located at $config->items[$index]
+ * @todo none 
+ *
  */
+
 function getItem($id)
 {
     global $config;
-    $index = $id -1 ;
-
-    //var_dump($config->items[$index]); // loads all arrays inside an array
-    #Parent level of object
+    $index = $id -1;
     $myArray = $config->items[$index]; //Create an array with values of object indexed at $index
     return $myArray;
 }
 
 /**
- *  getItemSubtotal($ItemQuantity, $ItemPrice)
  * Takes the quantity of items and item price as parameters. returns an item subtotal, pre-tax.
+ *
+ * <code>
+ *   $myItemSubtotal = getItemSubtotal($value, $ItemDetails->Price);
+ * </code>
+ *
+ * @param int $ItemQuantity the quantity ordered for an item
+ * @param float $ItemPrice the price for one of the items ordered
+ * @return float $itemSubTotal - the subtotal of the item ordered (pretax)
+ * @todo none 
+ *
  */
 
 function getItemSubtotal($ItemQuantity, $ItemPrice)
@@ -40,8 +54,19 @@ function getItemSubtotal($ItemQuantity, $ItemPrice)
 
 /**
  * getOrderSubtotal($lineSubtotal)
- * takes $itemSubtotal and adds it on every iteration of the each loop.
+ * computes the total pretax value of the order
+ *
+ * adds line item subtotals $itemSubtotal and adds it on every iteration of the each loop.
  * declare variable used in getOrderSubtotal($itemSubtotal)
+ *
+ * <code>
+ *   $myOrderSubtotal = getOrderSubtotal($myItemSubtotal);
+ * </code>
+ *
+ * @param float $lineSubtotal is the line item subtotal
+ * @return float $orderSubtotal : cast as currency
+ * @todo none 
+ *
  */
 
 $orderSubtotal = 0;
@@ -50,12 +75,22 @@ function getOrderSubtotal($lineSubtotal)
 {
     global $orderSubtotal;
     $orderSubtotal =  $orderSubtotal + $lineSubtotal;
-    return $orderSubtotal;    // cast as currency
+    return $orderSubtotal;  
 }
 
 /**
- * getPercentRate() converts tax rate to a percentage
- * ENTER tax rate as the percentage number. Example: if the taxrate is 10%, enter 10.
+ * converts tax rate to a percentage
+ *
+ * ENTER $percentTaxRate as the percentage number. Example: if the taxrate is 10%, enter 10.
+ *
+ * <code>
+ *    $myTaxPercent = getPercentRate();
+ * </code>
+ *
+ * @param none
+ * @return float $taxPercent the tax percentage used to caluculate tax
+ * @todo none 
+ *
  */
 
 $percentTaxRate = 9.3; //Seattle restaurant tax is 9.3%
@@ -69,8 +104,17 @@ function getPercentRate()
 }
 
 /**
- * getTaxAmount($preTaxAmount) computes the taxrate using and getTot';al($preTaxAmount) use the following variables: $percentTaxRate & $decimalTaxRate.
+ * computes the tax amount 
+ *
+ * <code>
+ *   $myTaxPercent = getPercentRate();
+ * </code>
+ *
+ * @param float $preTaxAmount the total pretax sale value
+ * @return float $taxAmount the total dollar amount of the tax
+ * @todo none
  */
+
 function getTaxAmount($preTaxAmount)
 {
     global $decimalTaxRate;
@@ -79,8 +123,15 @@ function getTaxAmount($preTaxAmount)
 }
 
 /**
- * getOrderTotal($preTaxAmount) computes the sales tax using the $percentTaxRate
+ * computes the sales tax using the $percentTaxRate
  * and adds it to the $preTaxAmount.
+ *
+ * <code>
+ *   $myTotal = getOrderTotal($myOrderSubtotal);
+ * </code>
+ *
+ * @param float $preTaxAmount the total pretax sale value
+ * @return float $withTaxAmount the total dollar amount of the sale with tax included
  */
 
 function getOrderTotal($preTaxAmount)
@@ -93,8 +144,17 @@ function getOrderTotal($preTaxAmount)
 }
 
 /**
- * getPluralName($quantity, $singleName, $pluralName) gets either the $this->SingularName or
- * the $this->PluralName from the Item class
+ * Gets the plural name if a value greater than 1 
+ *
+ * <code>
+ *   $myItemName = getPluralName($value, $ItemDetails->SingularName, $ItemDetails->PluralName)
+ * </code>
+ *
+ * @param int $quantity the quantity selected
+ * @param string $singleName the singular name of the item (e.g. taco)
+ * @param string $pluralName the plural name of the item (e.g. tacos)
+ * @return
+ * @todo none
  */
 
 function getPluralName($quantity, $singleName, $pluralName)
@@ -110,6 +170,12 @@ function getPluralName($quantity, $singleName, $pluralName)
 
 /**
  * class Item processes the menu item list in item.php into an array
+ *
+ *<code>
+ * $myItem = new Item(1,"Taco", "Tacos","Our Tacos are awesome!",4.95);
+ *</code>
+ *
+ * @todo none
  */
 
 class Item
