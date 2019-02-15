@@ -2,9 +2,13 @@
 /**
  * header_inc.php provides the initial HTML for our site files 
  * Footer includes copyright and W3 validator. 
- * @author itc250 winter2019 group project 3
+ * @author Esteban Silva comsat61@gmail.com
+ * @author Jeneva Scherr j3j3sherr@yahoo.com
+ * @author Thom Harrrington thomas.harrington@seattlecentral.edu
+ * @author Yonatan Gebreyesus yonatangebreyesus@gmail.com
  * @version 1.0 2019-02-14
  * @license https://www.apache.org/licenses/LICENSE-2.0
+ * @todo none
  */ 
 ?>
 <!-- START footer.php -->
