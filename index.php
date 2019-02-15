@@ -102,7 +102,7 @@ function showData()
 	
     //dumpDie($_POST);
 	
-	
+    echo '<div class="container">';	
 	echo '<h3 align="center">Here is your order!</h3>';
     echo'
             <div class = "table-responsive">
@@ -178,7 +178,6 @@ function showData()
 		//block below is the totals section
 		//@todo: might want to add some styling to the totals. 
 		//echoes output from cumulative total via the getOrderSubtotal($myItemSubtotal); function in the foreach loop
-        echo '<div class="container">';
         
 		echo "<b><p style=\"color:blue;\">Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
 		//print order tax amount
@@ -192,7 +191,6 @@ function showData()
 		$myTotal = getOrderTotal($myOrderSubtotal);
 		echo "<b><p style=\"color:blue;\">Order Total: " . money_format('%n', $myTotal) ."</p></b>";
         
-        echo '</div>';
 	}else{// redirect		       
 		echo '<script type="text/javascript">
            window.location = "' . THIS_PAGE . '"
@@ -201,6 +199,7 @@ function showData()
 	
 	//Go BACK link
 	echo '<p style = "text-align: center;"><a href="' . THIS_PAGE . '">ORDER AGAIN</a></p>';	
+    echo '</div>';
 	
 	include 'includes/footer.php'; #defaults to footer_inc.php
 }//end showData()
