@@ -19,16 +19,22 @@ include 'includes/items.php'; #provides business logic for subtotal, total calcu
  * The above live of code shows the parameter "act" being loaded with the value "next" which would be the 
  * unique identifier for the next step of a multi-step process
  *
- * @package ITC281
- * @author Bill Newman <williamnewman@gmail.com>
- * @version 1.1 2011/10/11
- * @link http://www.newmanix.com/
- * @license http://opensource.org/licenses/osl-3.0.php Open Software License ("OSL") v. 3.0
- * @todo finish instruction sheet
- * @todo add more complicated checkbox & radio button examples
+ * @author Esteban Silva comsat61@gmail.com
+ * @author Jeneva Scherr j3j3sherr@yahoo.com
+ * @author Thom Harrrington thomas.harrington@seattlecentral.edu
+ * @author Yonatan Gebreyesus yonatangebreyesus@gmail.com
+ * @version 1.0 2019-02-14
+ * @license https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * @todo None
+ *
+ * END CONFIG AREA ----------------------------------------------------------
+ /*
+ 
+/**
+ * Switch statement checks for user input and  directs to showForm() if no input received
+ * and showdata() if input not recevied. 
  */
-//END CONFIG AREA ----------------------------------------------------------
-# Read the value of 'action' whether it is passed via $_POST or $_GET with $_REQUEST
 if(isset($_REQUEST['act'])){$myAction = (trim($_REQUEST['act']));}else{$myAction = "";}
 switch ($myAction) 
 {//check 'act' for type of process
@@ -38,10 +44,13 @@ switch ($myAction)
 	default: # 1)Ask user to enter their name 
 	 	showForm();
 }
+/*
+ * shows form so user can enter make their menu slections.
+ */
 function showForm()
-{# shows form so user can enter their name.  Initial scenario
+{
 	global $config;
-	echo '
+    echo '
 	<div class="container">
 	<h3 style = "text-align: center;">Order great food here!</h3>
 	<p style = "text-align: center;">Please select your items and submit your order</p>
@@ -50,59 +59,60 @@ function showForm()
     <BR />
 	<form action="' . THIS_PAGE . '" method="post" onsubmit="return checkForm(this);">
              ';
-      echo '
-    <div class = "table-responsive">
-         <table class = "table">
-            <thead>
-                <tr>
-                    <th>Quantity</th>
-                    <th>Item</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                </tr>
+/*
+ * the details of the table entailed here. Quantity, item, description, and price. 
+ */
+     echo '
+     <div class = "table-responsive">
+        <table class = "table">
+           <thead>
+               <tr>
+                  <th>Quantity</th>
+                  <th>Item</th>
+                  <th>Description</th>
+                  <th>Price</th>
+               </tr>
             </thead>
             <tbody>      
              ';
-    
-		foreach($config->items as $item)
-          {//create form looping through each object property
-	
-            echo '         
-            <tr>
-                <td>  
-                    <div class="quantity">
+/*
+ * create form looping through each object property
+ */	
+    foreach($config->items as $item)
+          {     	
+           echo '         
+               <tr>
+                  <td>  
+                     <div class="quantity">
                         <input type="number"  name="item_' .$item->ID . '" min="0" max="50" step="1" value="0">
-                    </div>
-                </td>
-                <td>' . $item->SingularName . '</td>
-                <td>' .$item->Description . '</td>
-                <td>' . money_format('%n', $item->Price) . '</td>
-            </tr>       
-            ';              
+                     </div>
+                  </td>
+                  <td>' . $item->SingularName . '</td>
+                  <td>' .$item->Description . '</td>
+                  <td>' . money_format('%n', $item->Price) . '</td>
+              </tr>';              
           }//END Foreach  
     
-          echo ' 
-        </tbody>
-     </table>
-</div>  <!--DivTable Responsive-->  
+    echo ' 
+            </tbody>
+         </table>     
+      </div>  <!--DivTable Responsive-->  
           ';
             //
-          echo '
-				<p>
-					<input type="submit" value="Submit your order">
-				</p>
-		<input type="hidden" name="act" value="display" />
+    echo '
+       <p><input type="submit" value="Submit your order"></p>
+       <input type="hidden" name="act" value="display" />
 	</form>
 </div><!--Div Container-->
 	';        
     
 	include 'includes/footer.php';
 }
+/**
+* form submits here we show the selected items 
+*/
 function showData()
-{#form submits here we show entered name
-	
-    //dumpDie($_POST);
-	
+{
     echo '<div class="container">';	
 	echo '<h3 align="center">Here is your order!</h3>';
     echo'
@@ -119,37 +129,47 @@ function showData()
                 </tr>
                 </thead>
                 <tbody>';
-    
+/*
+ * loop the form elements
+ */
 	foreach($_POST as $name => $value)
-    {//loop the form elements
-        
-        //if form name attribute starts with 'item_', process it
+    {
+/*
+ * if form name attribute starts with 'item_', process it
+ */
         if(substr($name,0,5)=='item_')
         {
-            //explode the string into an array on the "_" looks like this : array(2) { [0]=> string(4) "item" [1]=> string(1) "9" }
+/*
+ * explode the string into an array on the "_" looks like this :
+ * array(2) { [0]=> string(4) "item" [1]=> string(1) "9" }
+ * id is the second element of the array
+ * forcibly cast to an int in the process
+ * getItem() finds the parent-level array for an index $id -1 of the object.
+ */
             $name_array = explode('_',$name);
-            //id is the second element of the array
-			//forcibly cast to an int in the process
             $id = (int)$name_array[1];
 
-			//getItem() finds the parent-level array for an index $id -1 of the object.
 			$ItemDetails = getItem($id); 					
 			
-			#child level of object
-						
-			//Calculates items pre-tax subtotal using array child-level key and the $value variable from 
-			//the foreach() loop above.
+/*
+ * Calculates items pre-tax subtotal using array child-level key and the $value variable from 
+ * the foreach() loop above.
+ */
 			$myItemSubtotal = getItemSubtotal($value, $ItemDetails->Price);						
-						
-			// Calculates the order pre-tax subtotal adding $myItemSubtotal on each loop
+/*						
+ * Calculates the order pre-tax subtotal adding $myItemSubtotal on each loop
+ */
 			$myOrderSubtotal = getOrderSubtotal($myItemSubtotal);	
 			if ($value > 0)
 			{
-                //Function gets either the $this->SingularName or the $this->PluralName from the Item class
+/*
+ * Get either the $this->SingularName or the $this->PluralName from the Item class
+ */
                 $myItemName = getPluralName($value, $ItemDetails->SingularName, $ItemDetails->PluralName);
                     
-				echo '</pre>';
-				//Item line details below.                    
+/*
+ * Item line details below.
+ */
                 echo "
                         <tr>
                           <td>$id</td>
@@ -173,15 +193,17 @@ function showData()
     echo'    </tbody>
             </table>
             </div>';
-	
+
+/*
+ * block below is the totals section
+ * @todo: might want to add some styling to the totals. 
+ * echoes output from cumulative total via the getOrderSubtotal($myItemSubtotal); 
+ */ 
 	if ($myOrderSubtotal > 0) //show totals
-	{
-		//block below is the totals section
-		//@todo: might want to add some styling to the totals. 
-		//echoes output from cumulative total via the getOrderSubtotal($myItemSubtotal); function in the foreach loop
-        
-		echo "<b><p style=\"color:blue;\">Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
-		//print order tax amount
+	{   echo "<b><p style=\"color:blue;\">Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
+/* 
+ * print order tax amount
+ */
 		$myTaxAmount = getTaxAmount($myOrderSubtotal); // change tax rate in 'includes/config.php'
 		echo "<b><p style=\"color:blue;\">Tax amount: " . money_format('%n', $myTaxAmount) ."</p></b>";
         
