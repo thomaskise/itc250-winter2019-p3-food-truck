@@ -1,13 +1,7 @@
 <?php 
-include 'includes/header.php'; #provides configuration, pathing, error handling, db credentials
-include 'includes/config.php'; #provides configuration, pathing, error handling, db credentials
-include 'includes/biz_logic.php'; #provides business logic for subtotal, total calculation
-include 'includes/items.php'; #provides business logic for subtotal, total calculation
 /**
- * item-demo2.php, based on demo_postback_nohtml.php is a single page web application that allows us to request and view
- * a customer's name
- *
- * web applications.
+ * index.php, is a single page web application that allows us to request order selection and view 
+ * the resulting order
  *
  * Any number of additional steps or processes can be added by adding keywords to the switch
  * statement and identifying a hidden form field in the previous step's form:
@@ -25,11 +19,13 @@ include 'includes/items.php'; #provides business logic for subtotal, total calcu
  * @author Yonatan Gebreyesus yonatangebreyesus@gmail.com
  * @version 1.0 2019-02-14
  * @license https://www.apache.org/licenses/LICENSE-2.0
- *
  * @todo None
  *
- * END CONFIG AREA ----------------------------------------------------------
- /*
+ */
+include 'includes/header.php'; #provides configuration, pathing, error handling, db credentials
+include 'includes/config.php'; #provides configuration, pathing, error handling, db credentials
+include 'includes/biz_logic.php'; #provides business logic for subtotal, total calculation
+include 'includes/items.php'; #provides business logic for subtotal, total calculation
 
 /**
  * Switch statement checks for user input and  directs to showForm() if no input received
@@ -47,8 +43,16 @@ switch ($myAction) {//check 'act' for type of process
     default: # 1)Ask user to enter their name
         showForm();
 }
-/*
+/**
  * shows form so user can enter make their menu slections.
+ *
+ * <code>
+ *   showForm();
+ * </code>
+ *
+ * @param none
+ * @return formatted outpt of html and php variables
+ * @todo none
  */
 function showForm()
 {
@@ -111,8 +115,16 @@ function showForm()
     include 'includes/footer.php';
 }
 /**
-* form submits here we show the selected items
-*/
+ * form submits here we show the selected items
+ *
+ * <code>
+ *   showData();
+ * </code>
+ *
+ * @param none
+ * @return formatted output of html and php variables
+ * @todo none
+ */
 function showData()
 {
     echo '<div class="container">';
@@ -192,7 +204,8 @@ function showData()
  * @todo: might want to add some styling to the totals.
  * echoes output from cumulative total via the getOrderSubtotal($myItemSubtotal);
  */
-    if ($myOrderSubtotal > 0) { //show totals   echo "<b><p style=\"color:blue;\">Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
+    if ($myOrderSubtotal > 0) { //show totals   
+      echo "<b><p style=\"color:blue;\">Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
      /*
  * print order tax amount
  */
