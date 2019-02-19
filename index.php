@@ -58,9 +58,9 @@ function showForm()
 {
     global $config;
     echo '
-	<div class="container">
-	<h3 style = "text-align: center;">Order great food here!</h3>
-	<p style = "text-align: center;">Please select your items and submit your order</p>
+	<div>
+	<h3>Order great food here!</h3>
+	<p Please select your items and submit your order</p>
     <BR />
     <BR />
     <BR />
@@ -70,8 +70,8 @@ function showForm()
  * the details of the table entailed here. Quantity, item, description, and price.
  */
     echo '
-     <div class = "table-responsive">
-        <table class = "table">
+     <div>
+        <table>
            <thead>
                <tr>
                   <th>Quantity</th>
@@ -89,7 +89,7 @@ function showForm()
         echo '         
                <tr>
                   <td>  
-                     <div class="quantity">
+                     <div>
                         <input type="number"  name="item_' .$item->ID . '" min="0" max="50" step="1" value="0">
                      </div>
                   </td>
@@ -127,11 +127,11 @@ function showForm()
  */
 function showData()
 {
-    echo '<div class="container">';
+    echo '<div>';
     echo '<h3 align="center">Here is your order!</h3>';
     echo'
-            <div class = "table-responsive">
-            <table class = "table">
+            <div>
+            <table>
                 <thead>
                 <tr>
                   <th>Item #</th>
@@ -205,26 +205,26 @@ function showData()
  * echoes output from cumulative total via the getOrderSubtotal($myItemSubtotal);
  */
     if ($myOrderSubtotal > 0) { //show totals   
-      echo "<b><p style=\"color:blue;\">Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
+      echo "<b><p>Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
      /*
  * print order tax amount
  */
      $myTaxAmount = getTaxAmount($myOrderSubtotal); // change tax rate in 'includes/config.php'
-     echo "<b><p style=\"color:blue;\">Tax amount: " . money_format('%n', $myTaxAmount) ."</p></b>";
+     echo "<b><p>Tax amount: " . money_format('%n', $myTaxAmount) ."</p></b>";
 
      //$percentTaxRate is defined in 'includes/config.php'
      $myTaxPercent = getPercentRate();
-        echo "<b><p style=\"color:blue;\">Tax Rate: " . $myTaxPercent . "%</p></b>";
+        echo "<b><p>Tax Rate: " . $myTaxPercent . "%</p></b>";
      //creates total with percentage added
      $myTotal = getOrderTotal($myOrderSubtotal);
-        echo "<b><p style=\"color:blue;\">Order Total: " . money_format('%n', $myTotal) ."</p></b>";
+        echo "<b><p>Order Total: " . money_format('%n', $myTotal) ."</p></b>";
     } else {
         //if form submitted with no items, propmt user to choose some items.
         echo 'Please add an item to your cart';
     }
 
     //Go BACK link
-    echo '<p style = "text-align: center;"><a href="' . THIS_PAGE . '">ORDER AGAIN</a></p>';
+    echo '<p><a href="' . THIS_PAGE . '">ORDER AGAIN</a></p>';
     echo '</div>';
 
     include 'includes/footer.php'; #defaults to footer_inc.php
