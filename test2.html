@@ -1,0 +1,149 @@
+
+
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+	<title>Food Truck</title>
+	<meta name="viewport" content="width=device-width" />
+	<meta name="robots" content="noindex,nofollow" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link media="all" rel="stylesheet" href="./css/form.css">
+        
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+
+	</head>
+	<body>
+	<!-- end of header include file -->
+
+
+	<div class="container">
+	<h3>Order great food here!</h3>
+	<p> Please select your items and submit your order</p>
+    <BR />
+    <BR />
+    <BR />
+	<form action="index.php" method="post" onsubmit="return checkForm(this);">
+             
+     <div>
+        <table class="pure-table pure-table-bordered">
+           <thead>
+               <tr>
+                  <th>Quantity</th>
+                  <th>Item</th>
+                  <th>Description</th>
+                  <th>Price</th>
+               </tr>
+            </thead>
+            <tbody>      
+                      
+               <tr>
+                  <td> 
+                    <div>
+                      <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector('[type=number]').stepDown();">
+                        <i class="fas fa-minus"></i>
+                      </button>
+
+                      <input class="number" type="number" name="item_1" min="0" max="10" value="0" step="1">
+
+                      <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector('[type=number]').stepUp();">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>                        
+                  </td>
+                  <td>Taco</td>
+                  <td>Our Tacos are awesome!</td>
+                  <td>$4.95</td>
+              </tr>         
+               <tr>
+                  <td> 
+                    <div>
+                      <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector('[type=number]').stepDown();">
+                        <i class="fas fa-minus"></i>
+                      </button>
+
+                      <input class="number" type="number" name="item_2" min="0" max="10" value="0" step="1">
+
+                      <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector('[type=number]').stepUp();">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>                        
+                  </td>
+                  <td>Sundae</td>
+                  <td>Our Sundaes are awesome!</td>
+                  <td>$3.95</td>
+              </tr>         
+               <tr>
+                  <td> 
+                    <div>
+                      <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector('[type=number]').stepDown();">
+                        <i class="fas fa-minus"></i>
+                      </button>
+
+                      <input class="number" type="number" name="item_3" min="0" max="10" value="0" step="1">
+
+                      <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector('[type=number]').stepUp();">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>                        
+                  </td>
+                  <td>Salad</td>
+                  <td>Our Salads are awesome!</td>
+                  <td>$5.95</td>
+              </tr>         
+               <tr>
+                  <td> 
+                    <div>
+                      <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector('[type=number]').stepDown();">
+                        <i class="fas fa-minus"></i>
+                      </button>
+
+                      <input class="number" type="number" name="item_4" min="0" max="10" value="0" step="1">
+
+                      <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector('[type=number]').stepUp();">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>                        
+                  </td>
+                  <td>Hot Tamale</td>
+                  <td>Our Tamales are awesome!</td>
+                  <td>$7.95</td>
+              </tr>         
+               <tr>
+                  <td> 
+                    <div>
+                      <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector('[type=number]').stepDown();">
+                        <i class="fas fa-minus"></i>
+                      </button>
+
+                      <input class="number" type="number" name="item_5" min="0" max="10" value="0" step="1">
+
+                      <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector('[type=number]').stepUp();">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>                        
+                  </td>
+                  <td>Chile Relleno</td>
+                  <td>Chile Relleno are awesome!</td>
+                  <td>$6.95</td>
+              </tr> 
+            </tbody>
+         </table>     
+      </div>  <!--DivTable Responsive-->  
+          
+       <p><input class="pure-button pure-button-primary" type="submit" value="Submit your order"></p>
+       <input type="hidden" name="act" value="display" />
+	</form>
+</div><!--Div Container-->
+		<!-- START footer.php -->
+	<footer>
+	<BR />
+	<hr class="footer">
+	<p style="text-align:center;"><small>&copy; 2018 - 2019 by Group, All Rights Reserved ~ <a href="https://validator.w3.org/check/referer" target="_blank">Valid HTML5</a> ~ <a href="https://jigsaw.w3.org/css-validator/check?uri=referer" target="_blank">Valid CSS</a></small></p>
+		</footer>
+		<!-- END WRAPPER -->
+
+		</body>
+		</html>

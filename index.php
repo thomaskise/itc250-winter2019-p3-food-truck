@@ -58,9 +58,10 @@ function showForm()
 {
     global $config;
     echo '
-	<div>
+
+	<div class="container">
 	<h3>Order great food here!</h3>
-	<p Please select your items and submit your order</p>
+	<p> Please select your items and submit your order</p>
     <BR />
     <BR />
     <BR />
@@ -71,7 +72,7 @@ function showForm()
  */
     echo '
      <div>
-        <table>
+        <table class="pure-table pure-table-bordered">
            <thead>
                <tr>
                   <th>Quantity</th>
@@ -88,10 +89,19 @@ function showForm()
     foreach ($config->items as $item) {
         echo '         
                <tr>
-                  <td>  
-                     <div>
-                        <input type="number"  name="item_' .$item->ID . '" min="0" max="50" step="1" value="0">
-                     </div>
+                  <td> 
+                    <div>
+                        <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector(\'[type=number]\').stepDown();">
+                            <i class="fas fa-minus fa-sm"></i>
+                        </button>                      
+
+                        <input class="number" type="number" name="item_' .$item->ID . '" min="0" max="10" value="0" step="1"> 
+                        
+                        <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector(\'[type=number]\').stepUp();">
+                            <i class="fas fa-plus fa-sm"></i>
+                        </button>                       
+
+                    </div>                        
                   </td>
                   <td>' . $item->SingularName . '</td>
                   <td>' .$item->Description . '</td>
@@ -106,7 +116,7 @@ function showForm()
           ';
     //
     echo '
-       <p><input type="submit" value="Submit your order"></p>
+       <p><input class="pure-button pure-button-primary" type="submit" value="Submit your order"></p>
        <input type="hidden" name="act" value="display" />
 	</form>
 </div><!--Div Container-->
@@ -127,11 +137,11 @@ function showForm()
  */
 function showData()
 {
-    echo '<div>';
+    echo '<div class="container">';
     echo '<h3 align="center">Here is your order!</h3>';
     echo'
             <div>
-            <table>
+            <table class="pure-table pure-table-bordered">
                 <thead>
                 <tr>
                   <th>Item #</th>
@@ -205,27 +215,59 @@ function showData()
  * echoes output from cumulative total via the getOrderSubtotal($myItemSubtotal);
  */
     if ($myOrderSubtotal > 0) { //show totals   
-      echo "<b><p>Pre-tax subtotal: " . money_format('%n', $myOrderSubtotal) ."</p></b>";
-     /*
- * print order tax amount
- */
-     $myTaxAmount = getTaxAmount($myOrderSubtotal); // change tax rate in 'includes/config.php'
-     echo "<b><p>Tax amount: " . money_format('%n', $myTaxAmount) ."</p></b>";
 
-     //$percentTaxRate is defined in 'includes/config.php'
-     $myTaxPercent = getPercentRate();
-        echo "<b><p>Tax Rate: " . $myTaxPercent . "%</p></b>";
-     //creates total with percentage added
-     $myTotal = getOrderTotal($myOrderSubtotal);
-        echo "<b><p>Order Total: " . money_format('%n', $myTotal) ."</p></b>";
+         $myTaxAmount = getTaxAmount($myOrderSubtotal); // change tax rate in 'includes/config.php'
+
+        //$percentTaxRate is defined in 'includes/config.php'
+         $myTaxPercent = getPercentRate();
+
+        //creates total with percentage added
+         $myTotal = getOrderTotal($myOrderSubtotal);
+        
+
+        //echo result in table format
+        echo "
+        <table class=\"pure-table pure-table-horizontal\">
+            <tbody>
+                <tr>
+                    <td>Pre-tax subtotal: </td>
+                    <td>" . money_format('%n', $myOrderSubtotal) . "</td>
+
+                </tr>
+
+                <tr>
+                    <td>Tax amount:</td>
+                    <td>" . money_format('%n', $myTaxAmount) ."</td>
+
+                </tr>
+
+                <tr>
+                    <td>Tax Rate:</td>
+                    <td>" . $myTaxPercent . "%</td>
+
+                </tr>       
+
+                <tr>
+                    <td>Order Total:</td>
+                    <td>" . money_format('%n', $myTotal) ."</td>
+
+                </tr>
+            </tbody>
+        </table>        
+        ";
+        
+        
     } else {
         //if form submitted with no items, propmt user to choose some items.
         echo 'Please add an item to your cart';
     }
 
     //Go BACK link
-    echo '<p><a href="' . THIS_PAGE . '">ORDER AGAIN</a></p>';
-    echo '</div>';
+    echo '<p><a class="pure-button pure-button-primary" href="' . THIS_PAGE . '">ORDER AGAIN</a></p>';
+    echo '</div>
+        
+    
+    ';
 
     include 'includes/footer.php'; #defaults to footer_inc.php
 }//end showData()

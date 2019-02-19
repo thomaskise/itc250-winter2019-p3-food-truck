@@ -12,6 +12,7 @@
  */
 ?>
 	<!-- START footer.php -->
+    </div>
 	<footer>
 	<BR />
 	<hr class="footer">
