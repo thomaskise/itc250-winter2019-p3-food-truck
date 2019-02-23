@@ -81,7 +81,7 @@ function showForm()
                   <th>Price</th>
                </tr>
             </thead>
-            <tbody>      
+            <tbody>                
              ';
     /*
  * create form looping through each object property
@@ -89,19 +89,11 @@ function showForm()
     foreach ($config->items as $item) {
         echo '         
                <tr>
-                  <td> 
-                    <div>
-                        <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector(\'[type=number]\').stepDown();">
-                            <i class="fas fa-minus fa-sm"></i>
-                        </button>                      
-
-                        <input class="number" type="number" name="item_' .$item->ID . '" min="0" max="10" value="0" step="1"> 
-                        
-                        <button class="pure-button pure-button-primary" type="button" onclick="this.parentNode.querySelector(\'[type=number]\').stepUp();">
-                            <i class="fas fa-plus fa-sm"></i>
-                        </button>                       
-
-                    </div>                        
+                  <td>                   
+                        <div class="quantity">
+                          <input type="number" name="item_' .$item->ID . '" min="0" max="10" value="0" step="1">
+                        </div>   
+                       
                   </td>
                   <td>' . $item->SingularName . '</td>
                   <td>' .$item->Description . '</td>
@@ -110,6 +102,10 @@ function showForm()
     }//END Foreach
 
     echo ' 
+                    <!--JQuery assets for number selector-->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+                    <script  src="js/index.js"></script>
+                    <!--END JQuery assests for number selector-->     
             </tbody>
          </table>     
       </div>  <!--DivTable Responsive-->  
@@ -264,7 +260,7 @@ function showData()
 
     //Go BACK link
     echo '<p><a class="pure-button pure-button-primary" href="' . THIS_PAGE . '">ORDER AGAIN</a></p>';
-    echo '</div>
+    echo '</div>   
         
     
     ';
